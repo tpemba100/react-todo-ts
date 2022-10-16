@@ -14,7 +14,7 @@ interface TodoContextProps {
   setTask: (value: []) => void;
 }
 
-const TodoContext = createContext<TodoContextProps>({} as TodoContextProps);
+export const TodoContext = createContext<TodoContextProps>({} as TodoContextProps);
 
 export default function TodoProvider({ children }: TodoProviderProps) {
   const [task, setTask] = useState<Task[]>([]);
@@ -43,13 +43,11 @@ export default function TodoProvider({ children }: TodoProviderProps) {
   }, []);
 
   useEffect(() => {
-    console.log('setting')
     localStorage.setItem("tasks", JSON.stringify(task));
   }, [task]);
 
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    // We have an issue below. Try to fix it and send Pull Request (PR) to my repo by creating separate branch.
+
     <TodoContext.Provider value={{ task, setTask }}>
       {children}
     </TodoContext.Provider>

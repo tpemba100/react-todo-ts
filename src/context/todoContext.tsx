@@ -19,7 +19,12 @@ interface TodoContextProps {
   filter: string;
   handleCompletedTask: (id: number) => void;
   handleDeleteTask: (id: number) => void;
-  filterTask: (filter: string) => void;
+  filterTask: (f: string) => void;
+  clearAll: () => void;
+
+  filteredProductList: Task[];
+  setFilteredProductTask: (value: []) => void;
+
   // handleCreateNewTask: (event: KeyboardEvent) => void;
   handleCreateNewTask: any;
   newTaskTitle: string;
@@ -32,6 +37,7 @@ export const TodoContext = createContext<TodoContextProps>(
 
 export default function TodoProvider({ children }: TodoProviderProps) {
   const [task, setTask] = useState<Task[]>([]);
+  const [filteredProductList, setFilteredProductList] = useState<Task[]>([]);
   const [filter, setFilter] = useState('All');
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const { colorMode } = useColorMode();
@@ -55,69 +61,99 @@ export default function TodoProvider({ children }: TodoProviderProps) {
     );
 
     setTask(tasks);
+    setFilteredProductList(tasks);
   }, []);
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(task));
   }, [task]);
 
-
   function handleCompletedTask(id: number) {
-
     task.filter((tasks) => {
       if (tasks.id == id) {
-        tasks.isComplete ? tasks.isComplete = false : tasks.isComplete = true;
+        tasks.isComplete
+          ? (tasks.isComplete = false)
+          : (tasks.isComplete = true);
 
         console.log(tasks.isComplete);
         setTask([...task]);
       }
-
     });
-  }     // filtered thru the all task[53], we selected our task with id that was passed
+  } // filtered thru the all task[53], we selected our task with id that was passed
   // if that task.isComplete is true -> make it false, else make it true.
   // we setTask and pass the updated task array to updated the task.
 
-  function filterTask(filter: string) {
+  // let filteredProductList = task.filter((f) => {
+  //   if (filter === 'Active') {
+  //     const activeTask = task.filter((tasks) => tasks.isComplete == false);
+  //     return activeTask;
+  //     console.log(activeTask);
+  //     // setTask(activeTask);
+  //   } else if (filter === 'Completed') {
+  //     const completedTask = task.filter((tasks) => tasks.isComplete == true);
+  //     return completedTask;
+  //     // setTask(completedTask);
+  //   } else return task;
+  // });
 
-    if (filter === "Active") {
+  // function filterTask(f: string) {
+  //   setFilter(f);
+
+  //   const filter = f;
+  //   if (f === 'Active') {
+  //     const activeTask = task.filter((tasks) => tasks.isComplete == false);
+  //     setTask(activeTask);
+  //   } else if (f === 'Completed') {
+  //     const completedTask = task.filter((tasks) => tasks.isComplete == true);
+  //     setTask(completedTask);
+  //   } else true;
+  //   console.log('filter is ' + filter);
+  //   }
+
+  function filterTask(f: string, filteredProductList: Task[], filter: string) {
+    if (f === 'Active') {
+      setFilter('Active');
       const activeTask = task.filter((tasks) => tasks.isComplete == false);
-      console.log(activeTask)
-      setTask(activeTask);
-    }
-    else if (filter === "Completed") {
+      filteredProductList = activeTask;
+      setFilteredProductList(filteredProductList);
+
+      // console.log('Active  ' + filteredProductList);
+      // console.log('Active dsds  ' + activeTask);
+    } else if (f === 'Completed') {
+      setFilter('Completed');
+
       const completedTask = task.filter((tasks) => tasks.isComplete == true);
-      console.log(completedTask)
-      setTask(completedTask);
+      filteredProductList = completedTask;
+      setFilteredProductList(filteredProductList);
+    } else if (f === 'All' && filteredProductList !== null) {
+      setFilter('All');
+      filteredProductList = task;
+      setFilteredProductList(filteredProductList);
+
+      // setTask(filteredProductList);
+      // console.log('All ->' + filteredProductList);
     }
-
-    console.log(filter)
-
+    console.log('filter is ' + filter);
   }
-  // function filterTask(filterWhat: string) {
-
-  //   if (filterWhat === "Active") {
-  //     const fdata = task.filter((tasks) => tasks.isComplete == false);
-  //     setTask(fdata);
-  //     console.log(fdata)
-  //   }
-  //   else if (filterWhat === "Completed") {
-  //     const fdata = task.filter((tasks) => tasks.isComplete == true);
-  //     setTask(fdata);
-  //     console.log(fdata)
-  //   }
-
-  //   // setTask(task)
-  // }
-
 
   function handleDeleteTask(id: number) {
     const filteredTask = task.filter((tasks) => tasks.id !== id);
 
+    setFilteredProductList(filteredTask);
     setTask(filteredTask);
     toast.success('Item Deleted!', {
       theme: colorMode,
     });
   } //
+
+  function clearAll() {
+    const filteredTask = task.filter((tasks) => {
+      return false;
+    });
+
+    setTask(filteredTask);
+    setFilteredProductList(filteredTask);
+  }
 
   function handleCreateNewTask(e: KeyboardEvent) {
     if (e.key === 'Enter') {
@@ -136,6 +172,7 @@ export default function TodoProvider({ children }: TodoProviderProps) {
 
       if (task.length === 0) {
         setTask([newTask]);
+        setFilteredProductList([newTask]);
         toast.success('Todo added!', {
           theme: colorMode,
         });
@@ -150,6 +187,7 @@ export default function TodoProvider({ children }: TodoProviderProps) {
       }
 
       setTask((oldState) => [...oldState, newTask]);
+      setFilteredProductList((oldState) => [...oldState, newTask]);
 
       toast.success('Todo added!', {
         theme: colorMode,
@@ -169,11 +207,14 @@ export default function TodoProvider({ children }: TodoProviderProps) {
         setTask,
         filter,
         filterTask,
+        clearAll,
         handleCompletedTask,
         handleDeleteTask,
         handleCreateNewTask,
         newTaskTitle,
         setNewTaskTitle,
+        filteredProductList,
+        setFilteredProductList,
       }}
     >
       {children}

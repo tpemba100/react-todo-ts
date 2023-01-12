@@ -9,8 +9,8 @@ A Classc Todo App with extra features such as filter and dark/light themed desig
 - Readibility accessibilty:Dark and Light themed
 - Responsive Design and Development
 
-## 
-![](https://github.com/tpemba100/react-todo-ts/react-ts-todo.gif)
+## GIF
+![](https://github.com/tpemba100/react-todo-ts/blob/master/react-ts-todo.gif)
 
 ## Technologies
 - React (Frontend View Framework)

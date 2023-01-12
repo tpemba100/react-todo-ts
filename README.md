@@ -1,4 +1,4 @@
-### Todo App with React_TypeScript_Vite
+## Classic Todo App
 
 ## Description
 A Classc Todo App with extra features such as filter and dark/light themed design

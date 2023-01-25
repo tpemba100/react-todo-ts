@@ -19,11 +19,11 @@ interface TodoContextProps {
   filter: string;
   handleCompletedTask: (id: number) => void;
   handleDeleteTask: (id: number) => void;
-  filterTask: (f: string, filteredProductList: Task[], filter: string) => void;
+  filterTask: (f: string) => void;
   clearAll: () => void;
 
   filteredProductList: Task[];
-  setFilteredProductTask: (value: []) => void;
+  // setFilteredProductTask: (value: []) => void;
 
   // handleCreateNewTask: (event: KeyboardEvent) => void;
   handleCreateNewTask: any;
@@ -37,7 +37,7 @@ export const TodoContext = createContext<TodoContextProps>(
 
 export default function TodoProvider({ children }: TodoProviderProps) {
   const [task, setTask] = useState<Task[]>([]);
-  const [filteredProductList, setFilteredProductList] = useState<Task[]>([]);
+  let [filteredProductList, setFilteredProductList] = useState<Task[]>([]);
   const [filter, setFilter] = useState('All');
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const { colorMode } = useColorMode();
@@ -83,34 +83,7 @@ export default function TodoProvider({ children }: TodoProviderProps) {
   // if that task.isComplete is true -> make it false, else make it true.
   // we setTask and pass the updated task array to updated the task.
 
-  // let filteredProductList = task.filter((f) => {
-  //   if (filter === 'Active') {
-  //     const activeTask = task.filter((tasks) => tasks.isComplete == false);
-  //     return activeTask;
-  //     console.log(activeTask);
-  //     // setTask(activeTask);
-  //   } else if (filter === 'Completed') {
-  //     const completedTask = task.filter((tasks) => tasks.isComplete == true);
-  //     return completedTask;
-  //     // setTask(completedTask);
-  //   } else return task;
-  // });
-
-  // function filterTask(f: string) {
-  //   setFilter(f);
-
-  //   const filter = f;
-  //   if (f === 'Active') {
-  //     const activeTask = task.filter((tasks) => tasks.isComplete == false);
-  //     setTask(activeTask);
-  //   } else if (f === 'Completed') {
-  //     const completedTask = task.filter((tasks) => tasks.isComplete == true);
-  //     setTask(completedTask);
-  //   } else true;
-  //   console.log('filter is ' + filter);
-  //   }
-
-  function filterTask(f: string, filteredProductList: Task[], filter: string) {
+  function filterTask(f: string) {
     if (f === 'Active') {
       setFilter('Active');
       const activeTask = task.filter((tasks) => tasks.isComplete == false);
@@ -134,6 +107,8 @@ export default function TodoProvider({ children }: TodoProviderProps) {
       // console.log('All ->' + filteredProductList);
     }
     console.log('filter is ' + filter);
+    console.log('f is ' + f);
+    console.log('filtered product list is ' + filteredProductList);
   }
 
   function handleDeleteTask(id: number) {
@@ -214,7 +189,7 @@ export default function TodoProvider({ children }: TodoProviderProps) {
         newTaskTitle,
         setNewTaskTitle,
         filteredProductList,
-        setFilteredProductList,
+        // setFilteredProductList,
       }}
     >
       {children}

@@ -11,19 +11,7 @@ A Classc Todo App with extra features such as filter and dark/light themed desig
 
 ## Live Site 
 [Visit Website](https://react-todo-ts-tgi7.vercel.app/){: .btn}
-<style>
-.btn {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-}
-</style>
+<a href="#" class="button pill">This is a pill button</a>
 
 
 ## GIF

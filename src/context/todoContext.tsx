@@ -19,7 +19,7 @@ interface TodoContextProps {
   filter: string;
   handleCompletedTask: (id: number) => void;
   handleDeleteTask: (id: number) => void;
-  filterTask: (f: string) => void;
+  filterTask: (f: string, filteredProductList: Task[], filter: string) => void;
   clearAll: () => void;
 
   filteredProductList: Task[];

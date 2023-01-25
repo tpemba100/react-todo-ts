@@ -1,4 +1,4 @@
-import { extendTheme, ThemeConfig, typeThemeConfig } from '@chakra-ui/react';
+import { extendTheme, ThemeConfig} from '@chakra-ui/react';
 
 const breakPoints = {
   sm: '35em',

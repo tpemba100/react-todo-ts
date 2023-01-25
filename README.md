@@ -9,6 +9,10 @@ A Classc Todo App with extra features such as filter and dark/light themed desig
 - Readibility accessibilty:Dark and Light themed
 - Responsive Design and Development
 
+## Live Site 
+[Visit Website](https://react-todo-ts-tgi7.vercel.app/)
+
+
 ## GIF
 ![](https://github.com/tpemba100/react-todo-ts/blob/master/react-ts-todo.gif)
 

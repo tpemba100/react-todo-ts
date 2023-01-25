@@ -10,7 +10,9 @@ A Classc Todo App with extra features such as filter and dark/light themed desig
 - Responsive Design and Development
 
 ## Live Site 
-[Visit Website](https://react-todo-ts-tgi7.vercel.app/)
+[Visit Website](https://react-todo-ts-tgi7.vercel.app/){: .btn}
+<script async defer src="https://buttons.github.io/buttons.js></script>
+
 
 
 ## GIF
@@ -27,3 +29,18 @@ A Classc Todo App with extra features such as filter and dark/light themed desig
 - React Toastify (notifications)
 - Node (npm)
 - Visual Studio Code (JavaScript IDE)
+
+                         
+                         <style>
+.btn {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+</style>

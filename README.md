@@ -18,7 +18,6 @@ A Classc Todo App with extra features such as filter and dark/light themed desig
 - Vite 
 - React Hooks (useState, useEffect,Custom Hooks,, useContext)
 - SPA (Single Page Application, Routers, Routes)
-- MongoDB 
 - CSS (styling the app)
 - Chakra UI
 - React Toastify (notifications)
